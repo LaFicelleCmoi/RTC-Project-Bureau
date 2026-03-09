@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@tauri-apps/api": "^1.6.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.6.3",
+    "electron-builder": "^26.8.1"
+  }
+}

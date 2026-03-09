@@ -1,0 +1,6 @@
+.env
+node_modules
+front/dist/
+back/dist/
+
+*.exe
