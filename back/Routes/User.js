@@ -8,7 +8,6 @@ router.get ("/User", getAllUser);
 router.get ("/User/:id", getUser);
 router.post("/User", createUser);
 
-// --- NOUVELLE ROUTE POUR L'HISTORIQUE DES MP ---
 router.get ("/User/:receiverId/messages", authenticate, getPrivateMessages);
 
 export default router;

@@ -8,7 +8,7 @@ import { GiphyFetch } from '@giphy/js-fetch-api';
 import { Grid } from '@giphy/react-components';
 import '../../../styles/channel.css';
 
-// Initialisation de Giphy
+
 const gf = new GiphyFetch(process.env.NEXT_PUBLIC_GIPHY_API_KEY || 'sH8KfY1rjowV4OyQFLVU7n0H0oYqD2bn');
 
 type PrivateMsg = { id: string; senderId: string | number; senderName: string; msg: string; };
@@ -28,7 +28,7 @@ export default function PrivateChatPage() {
   const sock = useRef<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll vers le bas
+  
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [msgs]);
@@ -40,13 +40,13 @@ export default function PrivateChatPage() {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     setLocalUser(user);
 
-    // 1. Récupérer le nom de la personne à qui on parle
+    
     fetch(`http://localhost:3001/api/User/${receiverId}`)
       .then(res => res.json())
       .then(data => { if (data.data) setReceiverName(data.data.name); })
       .catch(console.error);
 
-    // 2. Récupérer l'historique des MP
+    
     fetch(`http://localhost:3001/api/User/${receiverId}/messages`, {
       headers: { Authorization: "Bearer " + token }
     })
@@ -64,7 +64,7 @@ export default function PrivateChatPage() {
       })
       .catch(console.error);
 
-    // 3. Initialiser le Socket
+  
     const s = io("http://localhost:3001", { auth: { token } });
     sock.current = s;
 

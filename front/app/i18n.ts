@@ -72,7 +72,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: "fr", // Langue par défaut
+    lng: "fr", 
     fallbackLng: "fr",
     interpolation: { escapeValue: false }
   });

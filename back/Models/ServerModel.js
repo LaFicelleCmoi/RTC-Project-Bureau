@@ -99,7 +99,6 @@ export const addUserToServerService = async (userId, serverId) => {
   return result.rows[0];
 };
 
-// --- NOUVEAU : BANNISSEMENT ---
 export const banUserFromServerService = async (serverId, userId, bannedBy, reason, expiresAt) => {
   await pool.query(
     `DELETE FROM users_servers WHERE user_id = $1 AND server_id = $2`,

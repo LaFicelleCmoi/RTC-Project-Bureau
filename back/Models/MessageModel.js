@@ -1,6 +1,5 @@
 import pool from "../Config/DataBase.js";
 
-// 1. Sauvegarder un nouveau message
 export const saveMessageService = async (content, userId, channelId) => {
   const result = await pool.query(
     `INSERT INTO messages (content, user_id, channel_id) 
@@ -10,7 +9,6 @@ export const saveMessageService = async (content, userId, channelId) => {
   return result.rows[0];
 };
 
-// 2. Modifier un message existant (Trophée 6)
 export const editMessageService = async (messageId, userId, newContent) => {
   const result = await pool.query(
     `UPDATE messages 
@@ -21,7 +19,6 @@ export const editMessageService = async (messageId, userId, newContent) => {
   return result.rows[0];
 };
 
-// 3. Ajouter une réaction (Trophée 10)
 export const addReactionService = async (messageId, userId, emoji) => {
   const result = await pool.query(
     `INSERT INTO reactions (message_id, user_id, emoji) 
@@ -33,7 +30,6 @@ export const addReactionService = async (messageId, userId, emoji) => {
   return result.rows[0];
 };
 
-// --- NOUVEAU : MESSAGES PRIVÉS ---
 export const savePrivateMessageService = async (senderId, receiverId, content) => {
   const result = await pool.query(
     `INSERT INTO private_messages (sender_id, receiver_id, content) 

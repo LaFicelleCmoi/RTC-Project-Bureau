@@ -12,8 +12,8 @@ import {
     deleteServerByIdService,
     deleteChannelByIdService,
     getAllUsersByServerService,
-    banUserFromServerService, // NOUVEAU
-    checkUserBanService       // NOUVEAU
+    banUserFromServerService, 
+    checkUserBanService       
 } from "../Models/ServerModel.js";
 import { randomBytes } from 'node:crypto';
 
@@ -36,7 +36,7 @@ export const joinServerWithInviteCode = async (req, res, next) => {
     const server = await getServerByInviteCodeService(inviteCode);
     if (!server) return handleResponse(res, 404, "Server not found");
 
-    // NOUVEAU : Vérification du ban avant de rejoindre
+    
     const activeBan = await checkUserBanService(server.id, userId);
     if (activeBan) return handleResponse(res, 403, "Tu es banni de ce serveur.");
 
@@ -175,7 +175,7 @@ export const kickUserFromServer = async (req, res, next) => {
   } catch (error) { next(error); }
 };
 
-// --- NOUVEAU : CONTROLEUR POUR LE BANNISSEMENT ---
+
 export const banUserFromServer = async (req, res, next) => {
   try {
     const { serverId, userId } = req.params;

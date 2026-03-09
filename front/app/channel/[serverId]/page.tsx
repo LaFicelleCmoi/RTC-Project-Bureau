@@ -18,10 +18,10 @@ export default function ChannelPage() {
   const [channels, setChannels] = useState<Channel[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [inviteCode, setInviteCode] = useState<string>("");
-  const [localUser, setLocalUser] = useState<any>(null); // Pour stocker ton propre profil
+  const [localUser, setLocalUser] = useState<any>(null); 
 
   useEffect(() => {
-    // On récupère tes infos locales
+    
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     setLocalUser(user);
 
@@ -91,7 +91,7 @@ export default function ChannelPage() {
     }
   };
 
-  // NOUVELLE FONCTION : Bannir un membre (Temporaire ou Permanent)
+  
   const handleBan = async (userIdToBan: string | number, userName: string, durationHours: number | null) => {
     const typeBan = durationHours ? `temporairement (24h)` : `définitivement`;
     const confirmBan = window.confirm(`Es-tu sûr de vouloir bannir ${userName} ${typeBan} ?`);

@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTranslation } from 'react-i18next'; // <-- Import
+import { useTranslation } from 'react-i18next'; 
 import '../../styles/signup.css';
 
 export default function Inscription() {
-  const { t } = useTranslation(); // <-- Initialisation
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({ name: '', first_name: '', phone_number: '', mail: '', password: '' });
   const router = useRouter();
 
@@ -16,7 +16,7 @@ export default function Inscription() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-     // ... ton code handleSubmit ne change pas ...
+     
      e.preventDefault();
      try {
        const response = await fetch("http://localhost:3001/api/User", {

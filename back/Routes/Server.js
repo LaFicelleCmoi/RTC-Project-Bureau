@@ -14,7 +14,7 @@ import {
   getChannelById,
   getAllUsersByServer,
   kickUserFromServer,
-  banUserFromServer // NOUVEAU IMPORT
+  banUserFromServer 
 } from "../Controllers/ServerController.js";
 import { authenticate } from "../middleware/authentificationJwt.js";
 

@@ -33,7 +33,7 @@ export default function ChatPage() {
   const joinedRef = useRef(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll automatique vers le bas
+  
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [msgs]);
@@ -48,7 +48,7 @@ export default function ChatPage() {
     setShowGifPicker(false);
   };
 
-  // Récupération des infos du channel
+  
   useEffect(() => {
     const fetchChannel = async () => {
       const token = localStorage.getItem("token");
@@ -93,7 +93,7 @@ export default function ChatPage() {
     router.push(`/channel/${serverId}`);
   };
 
-  // Configuration de Socket.IO
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -101,10 +101,10 @@ export default function ChatPage() {
     const s = io("http://localhost:3001", { auth: { token }, autoConnect: false });
     sock.current = s;
 
-    // 1. Écoute des messages systèmes
+    
     s.on("system", (m: string) => setMsgs((prev) => [...prev, { kind: "system", text: String(m) }]));
 
-    // 2. ÉCOUTE DES NOUVEAUX MESSAGES DU CHAT
+    
     s.on("channel message", (incomingMsg: any) => {
       setMsgs((prev) => [
         ...prev, 
@@ -112,19 +112,19 @@ export default function ChatPage() {
           kind: "room", 
           id: incomingMsg.id, 
           sender: incomingMsg.sender, 
-          // On sécurise ici la récupération de la chaîne de texte !
+          
           text: incomingMsg.msg || "", 
           reactions: incomingMsg.reactions || [] 
         }
       ]);
     });
 
-    // 3. Écoute des modifications
+  
     s.on("message edited", (p: { id: string; newMsg: string }) => {
       setMsgs((prev) => prev.map((m) => (m.kind === "room" && m.id === p.id ? { ...m, text: p.newMsg || "" } : m)));
     });
 
-    // 4. Écoute des réactions
+    
     s.on("message reacted", (p: { messageId: string; emoji: string }) => {
       setMsgs((prev) => prev.map((m) => {
         if (m.kind === "room" && m.id === p.messageId) {
@@ -134,11 +134,11 @@ export default function ChatPage() {
       }));
     });
 
-    // 5. Écoute des utilisateurs en ligne et frappe
+    
     s.on("channel users", (data: any) => setUsers(Array.isArray(data.users) ? data.users : []));
     s.on("typing", (data: any) => setTypingText(data.isTyping ? `${data.user} est en train d'écrire...` : ""));
 
-    // 6. Expulsions
+    
     s.on("kicked_from_server", (data: { serverId: string | number }) => {
       if (String(data.serverId) === String(serverId)) {
         alert("Tu as été expulsé de ce serveur.");

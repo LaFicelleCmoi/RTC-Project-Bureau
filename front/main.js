@@ -7,14 +7,14 @@ function createWindow() {
     width: 1200,
     height: 800,
     title: "RTC Strikes Back",
-    // On met un fond neutre au chargement
+    
     backgroundColor: '#ffffff', 
     webPreferences: {
       nodeIntegration: true
     }
   });
 
-  // --- CRÉATION DU MENU PERSONNALISÉ ---
+  
   const menuTemplate = [
     {
       label: 'Affichage',
@@ -44,9 +44,9 @@ function createWindow() {
 
   const menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
-  // -------------------------------------
+ 
 
-  // Chargement de ton site Next.js
+ 
   mainWindow.loadURL('http://localhost:3000');
 
   mainWindow.on('closed', () => {

@@ -51,13 +51,11 @@ export const createUser = async (req, res, next) => {
     }
 };
 
-// --- NOUVEAU CODE POUR L'HISTORIQUE DES MP ---
 export const getPrivateMessages = async (req, res, next) => {
   try {
     const senderId = req.user.id;
     const { receiverId } = req.params;
 
-    // Récupère la conversation complète entre 2 utilisateurs
     const result = await pool.query(
       `SELECT * FROM private_messages 
        WHERE (sender_id = $1 AND receiver_id = $2) 
