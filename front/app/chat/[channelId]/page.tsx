@@ -8,7 +8,11 @@ import { Grid } from '@giphy/react-components';
 import { useTranslation } from 'react-i18next';
 import '../../../styles/channel.css';
 
-const gf = new GiphyFetch(process.env.NEXT_PUBLIC_GIPHY_API_KEY || 'sH8KfY1rjowV4OyQFLVU7n0H0oYqD2bn');
+const apiKey = process.env.NEXT_PUBLIC_GIPHY_API_KEY;
+if (!apiKey) {
+  console.warn("Attention : La clé API Giphy est manquante dans les variables d'environnement.");
+}
+const gf = new GiphyFetch(apiKey || '');
 
 type Msg =
   | { kind: "system"; text: string }
